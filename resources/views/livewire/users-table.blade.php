@@ -13,9 +13,9 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($users as $key => $user)
+        @foreach($users as $user)
             <tr>
-                <td>{{ $users->firstItem() + $key }}.</td>
+                <td>{{ $user->id }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->account->order }}</td>
