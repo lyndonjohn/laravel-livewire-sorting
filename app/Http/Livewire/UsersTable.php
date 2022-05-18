@@ -27,10 +27,11 @@ class UsersTable extends Component
             'users' => User::with('account')
                 ->when($this->sort, function ($query) {
                     if ($this->sort === 'order') {
-                        $query->join('accounts', 'users.id', '=', 'accounts.user_id')
+                        $query->leftJoin('accounts', 'users.id', '=', 'accounts.user_id')
+                            ->select('accounts.*', 'users.*')
                             ->orderBy('accounts.order', $this->sortDirection ? 'asc' : 'desc');
                     } else {
-                        $query->orderBy($this->sort, $this->sortDirection ? 'asc' : 'desc');
+                        $query->orderBy('users.'.$this->sort, $this->sortDirection ? 'asc' : 'desc');
                     }
                     return $query;
                 })->orderByDesc('users.id')
